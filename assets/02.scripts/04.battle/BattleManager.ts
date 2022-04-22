@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,15 +13,9 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
 @ccclass('BattleManager')
 export class BattleManager extends Component {
-    // [1]
-    // dummy = '';
-
-    // [2]
-    // @property
-    // serializableDummy = 0;
 
     start () {
         // [3]
@@ -30,6 +24,11 @@ export class BattleManager extends Component {
     // update (deltaTime: number) {
     //     // [4]
     // }
+
+
+    backToLobby(){
+        director.loadScene("01.Lobby");
+    }
 }
 
 /**

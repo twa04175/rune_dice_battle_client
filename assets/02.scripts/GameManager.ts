@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, director } from 'cc';
+import { _decorator, Component, Node, director, game } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -14,7 +14,7 @@ const { ccclass, property } = _decorator;
  *
  */
 
-enum GAMESTATE {
+enum GAME_STATE {
     LOBBY,
     WAIT,
     BATTLE,
@@ -23,9 +23,10 @@ enum GAMESTATE {
 @ccclass('GameManager')
 export class GameManager extends Component {
 
-    public gameState:GAMESTATE = GAMESTATE.LOBBY;
+    public gameState:GAME_STATE = GAME_STATE.LOBBY;
 
     start () {
+        game.addPersistRootNode(this.node);
         // [3]
     }
 
@@ -34,7 +35,7 @@ export class GameManager extends Component {
     // }
 
     startGame(){
-        this.gameState = GAMESTATE.MAP;
+        this.gameState = GAME_STATE.WAIT;
         director.loadScene("02.InGame");
     }
 }
