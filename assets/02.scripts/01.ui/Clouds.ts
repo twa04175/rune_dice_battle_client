@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Prefab, CCFloat, Vec3, instantiate, tween } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,23 +13,54 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
 @ccclass('Clouds')
 export class Clouds extends Component {
-    // [1]
-    // dummy = '';
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    //Generate Info
+    private minHeight: number = 0;
+    private maxHeight: number = 300;
+    private cloudSpeed: number = 30;
+
+    @property({type: Prefab})
+    public cloud:Prefab = null;
+
+    private cloudList:Node[] = [];
 
     start () {
         // [3]
+        console.log('Clouds.ts:start:37 -> start');
+        this.addCloud(this.node, new Vec3(-600,Math.random() * (this.maxHeight - this.minHeight) + this.minHeight,0));
+
+        this.scheduleOnce(()=>{
+            this.addCloud(this.node, new Vec3(-600,Math.random() * (this.maxHeight - this.minHeight) + this.minHeight,0));
+        },15);
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+
+    update (deltaTime: number) {
+        if(this.cloudList.length !== 0) {
+            this.moveClouds(deltaTime);
+        }
+    }
+
+    moveClouds(deltaTime){
+        for(let i = 0; i<this.cloudList.length; i++) {
+            this.cloudList[i].translate(new Vec3(deltaTime * this.cloudSpeed,0,0));
+            if(this.cloudList[i].position.x >= 660) {
+                this.cloudList[i].setPosition(new Vec3(-600,Math.random() * (this.maxHeight - this.minHeight) + this.minHeight,0));
+            }
+        }
+    }
+
+    addCloud(parent: Node, localPos: Vec3) {
+        let cloudNode: Node = instantiate(this.cloud);
+
+        cloudNode.setPosition(localPos);
+        cloudNode.parent = parent;
+
+        this.cloudList.push(cloudNode);
+    }
 }
 
 /**

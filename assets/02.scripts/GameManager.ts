@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,15 +13,17 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
+enum GAMESTATE {
+    LOBBY,
+    WAIT,
+    BATTLE,
+}
+
 @ccclass('GameManager')
 export class GameManager extends Component {
-    // [1]
-    // dummy = '';
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    public gameState:GAMESTATE = GAMESTATE.LOBBY;
 
     start () {
         // [3]
@@ -30,6 +32,11 @@ export class GameManager extends Component {
     // update (deltaTime: number) {
     //     // [4]
     // }
+
+    startGame(){
+        this.gameState = GAMESTATE.MAP;
+        director.loadScene("02.InGame");
+    }
 }
 
 /**

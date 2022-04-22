@@ -11,7 +11,7 @@
     "6c48a": {
       "importer": "texture",
       "uuid": "bb264858-9f77-4007-a588-109c0f24d15d@6c48a",
-      "displayName": "btn-upgrade",
+      "displayName": "btn-back",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -34,7 +34,7 @@
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "bb264858-9f77-4007-a588-109c0f24d15d@f9941",
-      "displayName": "btn-upgrade",
+      "displayName": "btn-back",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
