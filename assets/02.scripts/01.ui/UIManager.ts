@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, input, Input } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -18,7 +18,6 @@ const { ccclass, property } = _decorator;
 export class UIManager extends Component {
 
     start () {
-        // [3]
     }
 
     update (deltaTime: number) {
@@ -29,12 +28,12 @@ export class UIManager extends Component {
 
     }
 
-    setOnClickOnce(event:Function){
-        this.node.on('mousedown', event);
+    setOnClickOnce(event){
+        input.on(Input.EventType.MOUSE_UP, event, this.node);
     }
 
-    deleteClickEvent(event:Function) {
-        this.node.off('mousedown', event);
+    deleteClickEvent() {
+        input.off(Input.EventType.MOUSE_UP);
     }
 }
 

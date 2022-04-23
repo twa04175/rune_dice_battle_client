@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Sprite, Enum } from 'cc';
+import { _decorator, Component, Node, Sprite, Enum, tween, Vec3 } from 'cc';
 import {RUNE, Rune } from './Rune';
 const { ccclass, property } = _decorator;
 
@@ -40,16 +40,19 @@ export class RuneDice extends Component {
     @property ({type:Enum(DICE_RANK)})
     public rank:DICE_RANK = DICE_RANK.NORMAL;
 
-    MAX_ROLLING:number = 10 ;
-    MIN_ROLLING:number = 20;
+    MAX_ROLLING:number = 20;
+    MIN_ROLLING:number = 30;
 
     rollState:ROLL = ROLL.NOT;
 
     pick:RUNE = null;
 
+    anchor:Vec3 = null;
+
     start () {
         // 타입과 랭크에 따른 주사위 스프라이트 변환
         this.setType(this.rank);
+        this.anchor = this.node.position;
     }
 
     // update (deltaTime: number) {
@@ -91,12 +94,31 @@ export class RuneDice extends Component {
             let rand = Math.floor(Math.random() * RUNE._LENGTH);
             rune.setRune(rand);
 
+
+            this.bouncyDice(speed);
             this.scheduleOnce(() => {
-                changeSprite(cnt-1, rune, speed);
+                changeSprite(cnt-1, rune, this.getRollingSpeed(cnt-1, speed));
             }, speed);
         }
 
         let rollingNum = Math.floor(Math.random() *  (this.MAX_ROLLING - this.MIN_ROLLING)) + this.MIN_ROLLING;
         changeSprite(rollingNum, rune, 0.5);
+    }
+
+    //남은 횟수와 현재 스피드를 통해 현재 속도 산출
+    getRollingSpeed(cnt:number, speed: number){
+        return 0.2;
+    }
+
+    //n초간 주사위 스케일 조절 트윈 실행
+    bouncyDice(time:number){
+        let now:Vec3 = this.node.position;
+        let shake:Vec3 = new Vec3(now.x+ 100, now.y + 100);
+        console.log('RuneDice.ts:bouncyDice:114 ->',time/2, now, shake);
+        tween(this.node)
+            .by(time/2, { position: new Vec3(10,10,0)}, { easing: 'bounceInOut'})
+            .by(time/2, { position: new Vec3(-10,-10,0)}, { easing: 'bounceInOut'})
+            .repeat(1)
+            .start();
     }
 }

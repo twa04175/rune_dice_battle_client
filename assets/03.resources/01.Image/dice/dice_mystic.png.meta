@@ -2,7 +2,7 @@
   "ver": "1.0.22",
   "importer": "image",
   "imported": true,
-  "uuid": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521",
+  "uuid": "769ece79-f5a0-486f-8ff4-8da928dded06",
   "files": [
     ".png",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521@6c48a",
+      "uuid": "769ece79-f5a0-486f-8ff4-8da928dded06@6c48a",
       "displayName": "dice_mystic",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521",
+        "imageUuidOrDatabaseUri": "769ece79-f5a0-486f-8ff4-8da928dded06",
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521@f9941",
+      "uuid": "769ece79-f5a0-486f-8ff4-8da928dded06@f9941",
       "displayName": "dice_mystic",
       "id": "f9941",
       "name": "spriteFrame",
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": -0.5,
+        "offsetY": 0,
         "trimX": 0,
-        "trimY": 1,
-        "width": 65,
-        "height": 58,
-        "rawWidth": 65,
-        "rawHeight": 59,
+        "trimY": 0,
+        "width": 64,
+        "height": 62,
+        "rawWidth": 64,
+        "rawHeight": 62,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521@6c48a",
+        "imageUuidOrDatabaseUri": "769ece79-f5a0-486f-8ff4-8da928dded06@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "type": "sprite-frame",
     "hasAlpha": true,
-    "redirect": "8210c807-1d6c-46bd-8bfe-a9c96aa6e521@f9941"
+    "redirect": "769ece79-f5a0-486f-8ff4-8da928dded06@f9941"
   }
 }

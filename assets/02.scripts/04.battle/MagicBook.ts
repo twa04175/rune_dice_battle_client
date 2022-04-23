@@ -33,24 +33,24 @@ export class MagicBook extends Component {
     // }
 
     activeBook(element:ELEMENTAL_TYPE) {
-        console.log('MagicBook.ts:activeBook:30 ->',);
         this.node.active = true;
 
         if(this.currentBook !== null) {
             this.currentBook.active = false;
         }
 
-        console.log('MagicBook.ts:activeBook:39 ->',  this.node);
-        console.log('MagicBook.ts:activeBook:39 ->',  this.node.getChildByName('book'));
         this.currentBook = this.node.children[0].children[element];
         this.currentBook.active = true;
 
-        this.uiManager.setOnClickOnce(this.disableBook);
+        this.uiManager.setOnClickOnce(()=>{
+            this.disableBook();
+        });
     }
 
     disableBook() {
+        console.log('MagicBook.ts:disableBook:54 ->',);
         this.node.active = false;
-        this.uiManager.deleteClickEvent(this.disableBook);
+        this.uiManager.deleteClickEvent();
     }
 }
 

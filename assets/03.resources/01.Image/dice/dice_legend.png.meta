@@ -2,7 +2,7 @@
   "ver": "1.0.22",
   "importer": "image",
   "imported": true,
-  "uuid": "a82d2ef1-e89d-4410-9686-fe8673031f9e",
+  "uuid": "db9865ab-53b6-4adb-8b48-9f480f2e6de8",
   "files": [
     ".png",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "a82d2ef1-e89d-4410-9686-fe8673031f9e@6c48a",
+      "uuid": "db9865ab-53b6-4adb-8b48-9f480f2e6de8@6c48a",
       "displayName": "dice_legend",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "a82d2ef1-e89d-4410-9686-fe8673031f9e",
+        "imageUuidOrDatabaseUri": "db9865ab-53b6-4adb-8b48-9f480f2e6de8",
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "a82d2ef1-e89d-4410-9686-fe8673031f9e@f9941",
+      "uuid": "db9865ab-53b6-4adb-8b48-9f480f2e6de8@f9941",
       "displayName": "dice_legend",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
-        "offsetY": 0,
+        "offsetX": 0,
+        "offsetY": 0.5,
         "trimX": 0,
-        "trimY": 1,
+        "trimY": 0,
         "width": 67,
-        "height": 59,
-        "rawWidth": 68,
-        "rawHeight": 61,
+        "height": 63,
+        "rawWidth": 67,
+        "rawHeight": 64,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a82d2ef1-e89d-4410-9686-fe8673031f9e@6c48a",
+        "imageUuidOrDatabaseUri": "db9865ab-53b6-4adb-8b48-9f480f2e6de8@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "type": "sprite-frame",
     "hasAlpha": true,
-    "redirect": "a82d2ef1-e89d-4410-9686-fe8673031f9e@f9941"
+    "redirect": "db9865ab-53b6-4adb-8b48-9f480f2e6de8@f9941"
   }
 }

@@ -2,7 +2,7 @@
   "ver": "1.0.22",
   "importer": "image",
   "imported": true,
-  "uuid": "e67c2dc1-1c19-448e-80c8-da1350145710",
+  "uuid": "7cb301e3-6748-45d9-8c1d-14703190805c",
   "files": [
     ".png",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e67c2dc1-1c19-448e-80c8-da1350145710@6c48a",
+      "uuid": "7cb301e3-6748-45d9-8c1d-14703190805c@6c48a",
       "displayName": "dice_epic",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "e67c2dc1-1c19-448e-80c8-da1350145710",
+        "imageUuidOrDatabaseUri": "7cb301e3-6748-45d9-8c1d-14703190805c",
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "e67c2dc1-1c19-448e-80c8-da1350145710@f9941",
+      "uuid": "7cb301e3-6748-45d9-8c1d-14703190805c@f9941",
       "displayName": "dice_epic",
       "id": "f9941",
       "name": "spriteFrame",
@@ -41,21 +41,21 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
-        "offsetY": -1,
+        "offsetX": 0,
+        "offsetY": 0.5,
         "trimX": 0,
-        "trimY": 2,
-        "width": 67,
-        "height": 59,
-        "rawWidth": 68,
-        "rawHeight": 61,
+        "trimY": 0,
+        "width": 66,
+        "height": 63,
+        "rawWidth": 66,
+        "rawHeight": 64,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e67c2dc1-1c19-448e-80c8-da1350145710@6c48a",
+        "imageUuidOrDatabaseUri": "7cb301e3-6748-45d9-8c1d-14703190805c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "type": "sprite-frame",
     "hasAlpha": true,
-    "redirect": "e67c2dc1-1c19-448e-80c8-da1350145710@f9941"
+    "redirect": "7cb301e3-6748-45d9-8c1d-14703190805c@f9941"
   }
 }
