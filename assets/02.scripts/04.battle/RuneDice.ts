@@ -1,5 +1,6 @@
 
-import { _decorator, Component, Node, Sprite } from 'cc';
+import { _decorator, Component, Node, Sprite, Enum } from 'cc';
+import {RUNE, Rune } from './Rune';
 const { ccclass, property } = _decorator;
 
 /**
@@ -21,38 +22,81 @@ enum DICE_RANK{
     MYSTIC
 }
 
-enum DICE_TYPE{
+export enum ELEMENTAL_TYPE{
     FIRE,
     ICE,
     EARTH,
 }
 
-
+enum ROLL{
+    NOT,
+    ING,
+    END,
+}
 
 @ccclass('RuneDice')
 export class RuneDice extends Component {
 
-    @property({type:DICE_RANK})
+    @property ({type:Enum(DICE_RANK)})
     public rank:DICE_RANK = DICE_RANK.NORMAL;
-    @property({type:DICE_TYPE})
-    public element:DICE_TYPE = DICE_TYPE.ICE;
+
+    MAX_ROLLING:number = 10 ;
+    MIN_ROLLING:number = 20;
+
+    rollState:ROLL = ROLL.NOT;
+
+    pick:RUNE = null;
 
     start () {
         // 타입과 랭크에 따른 주사위 스프라이트 변환
-        let sprite:Sprite = this.node.getComponent(Sprite);
-
-        console.log('RuneDice.ts:start:42 ->',sprite);
-
+        this.setType(this.rank);
     }
 
     // update (deltaTime: number) {
     //     // [4]
     // }
 
+    setType (rank:DICE_RANK) {
+
+    }
+
+    onClick() {
+        switch (this.rollState) {
+            case ROLL.NOT:
+                this.rolling();
+                break;
+            case ROLL.ING:
+                return
+            case ROLL.END:
+                console.log('RuneDice.ts:onClick:71 -> pick RONE', this.pick);
+                break;
+        }
+    }
+
     rolling() {
+        this.rollState = ROLL.ING;
         console.log('RuneDice.ts:rolling:35 -> rolling Dice',);
 
-        //내부 랜덤 룬 스프라이트 사용
-        //빠르게 전환하다가 천천히 느려지면서 주사위 확정
+        let runeNode = this.node.getChildByName('rune_words');
+        let rune = runeNode.getComponent(Rune);
+
+        let changeSprite = (cnt:number, rune:Rune, speed:number) => {
+            console.log('RuneDice.ts:changeSprite:87 ->',cnt, "  rune:",rune.getRune());
+            if(cnt <= 0) {
+                this.rollState = ROLL.END;
+                this.pick = rune.getRune();
+                return;
+            }
+
+            let rand = Math.floor(Math.random() * RUNE._LENGTH);
+            rune.setRune(rand);
+
+            this.scheduleOnce(() => {
+                changeSprite(cnt-1, rune, speed);
+            }, speed);
+        }
+
+        let rollingNum = Math.floor(Math.random() *  (this.MAX_ROLLING - this.MIN_ROLLING)) + this.MIN_ROLLING;
+        changeSprite(rollingNum, rune, 0.5);
     }
 }

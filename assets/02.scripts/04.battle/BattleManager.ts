@@ -1,5 +1,7 @@
+import {_decorator, Component, director} from 'cc';
+import {ELEMENTAL_TYPE} from "db://assets/02.scripts/04.battle/RuneDice";
+import {MagicBook} from "db://assets/02.scripts/04.battle/MagicBook";
 
-import { _decorator, Component, Node, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -17,6 +19,9 @@ const { ccclass, property } = _decorator;
 @ccclass('BattleManager')
 export class BattleManager extends Component {
 
+    @property({type: MagicBook})
+    public magicPanel:MagicBook = null;
+
     start () {
         // [3]
     }
@@ -25,9 +30,20 @@ export class BattleManager extends Component {
     //     // [4]
     // }
 
-
     backToLobby(){
         director.loadScene("01.Lobby");
+    }
+
+    openFireBook(){
+        this.magicPanel.activeBook(ELEMENTAL_TYPE.FIRE);
+    }
+
+    openIceBook(){
+        this.magicPanel.activeBook(ELEMENTAL_TYPE.ICE);
+    }
+
+    openEarthBook(){
+        this.magicPanel.activeBook(ELEMENTAL_TYPE.EARTH);
     }
 }
 

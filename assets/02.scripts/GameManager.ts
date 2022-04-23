@@ -14,28 +14,15 @@ const { ccclass, property } = _decorator;
  *
  */
 
-enum GAME_STATE {
-    LOBBY,
-    WAIT,
-    BATTLE,
-}
-
 @ccclass('GameManager')
 export class GameManager extends Component {
 
-    public gameState:GAME_STATE = GAME_STATE.LOBBY;
-
     start () {
-        game.addPersistRootNode(this.node);
-        // [3]
+        //game.addPersistRootNode(this.node);
+        console.log('GameManager.ts:start:33 ->',123);
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
-
     startGame(){
-        this.gameState = GAME_STATE.WAIT;
         director.loadScene("02.InGame");
     }
 }

@@ -13,23 +13,29 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
 @ccclass('UIManager')
 export class UIManager extends Component {
-    // [1]
-    // dummy = '';
-
-    // [2]
-    // @property
-    // serializableDummy = 0;
 
     start () {
         // [3]
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    update (deltaTime: number) {
+        // [4]
+    }
+
+    mouseTrace () {
+
+    }
+
+    setOnClickOnce(event:Function){
+        this.node.on('mousedown', event);
+    }
+
+    deleteClickEvent(event:Function) {
+        this.node.off('mousedown', event);
+    }
 }
 
 /**

@@ -22,9 +22,6 @@
       },
       {
         "__id__": 48
-      },
-      {
-        "__id__": 54
       }
     ],
     "_active": true,
@@ -32,7 +29,7 @@
     "_prefab": null,
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 56
+      "__id__": 54
     },
     "_id": "e2509083-2552-4838-b895-042b015f2af5"
   },
@@ -2216,79 +2213,21 @@
     "_id": "0fP0UPcoRI84FR0oicaXdu"
   },
   {
-    "__type__": "cc.Node",
-    "_name": "RuneWordPool",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 55
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "6fRUe04iFEboR9a+ti8DsP"
-  },
-  {
-    "__type__": "407abV37uxF1IB0FZOWdDbG",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 54
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "runePref": {
-      "__uuid__": "d6da9708-1f1e-4bb4-867b-6a70c5817ccd",
-      "__expectedType__": "cc.Prefab"
-    },
-    "_id": "f36yyqS+5IrKy+xHE+vwcq"
-  },
-  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 57
+      "__id__": 55
     },
     "shadows": {
-      "__id__": 58
+      "__id__": 56
     },
     "_skybox": {
-      "__id__": 59
+      "__id__": 57
     },
     "fog": {
-      "__id__": 60
+      "__id__": 58
     },
     "octree": {
-      "__id__": 61
+      "__id__": 59
     }
   },
   {
