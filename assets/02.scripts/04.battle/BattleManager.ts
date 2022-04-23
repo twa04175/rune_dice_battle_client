@@ -38,6 +38,8 @@ export class BattleManager extends Component {
     @property({type: Node})
     mouseRune:Node = null;
 
+    refreshCnt:number = 3;
+
     start () {
         // [3]
     }
@@ -61,9 +63,9 @@ export class BattleManager extends Component {
     }
 
     //주사위에 있는 룬을 선택한 상태
-    onRunePickMode(rune:RUNE, position:Vec3) {
+    onRunePickMode(rune:RUNE) {
         this.deleteRune();
-        this.createRune(rune, position);
+        this.createRune(rune);
 
         input.on(Input.EventType.MOUSE_MOVE, (r) => {
             if(this.mouseRune !== null) {
@@ -81,20 +83,19 @@ export class BattleManager extends Component {
         this.battleState = BattleState.PICK;
         console.log('BattleManager.ts:onRunePickMode:78 ->',this.mouseRune);
     }
-
-    createRune(rune:RUNE, position) {
+    createRune(rune:RUNE) {
         console.log('BattleManager.ts:createRune:94 ->',this.mouseRune);
         this.mouseRune.active = true;
-        this.mouseRune.setPosition(position);
+        this.mouseRune.setPosition(new Vec3(-50,-50,-50));
         this.mouseRune.children[rune].active = true;
     }
-
     deleteRune(){
         for(let i = 0; i<this.mouseRune.children.length; i++) {
             this.mouseRune.children[i].active = false;
         }
         this.mouseRune.active = false;
     }
+
 }
 
 /**

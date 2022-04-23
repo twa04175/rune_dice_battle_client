@@ -1,5 +1,7 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, tween, Vec3 } from 'cc';
+import {DICE_RANK, ROLL, RuneDice} from "db://assets/02.scripts/04.battle/RuneDice";
+import { RUNE } from '../04.battle/Rune';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,23 +15,85 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
- 
+
 @ccclass('DicePanel')
 export class DicePanel extends Component {
-    // [1]
-    // dummy = '';
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    runes:RUNE[] = [];
+
+    @property({type:Node})
+    refreshBtn:Node = null;
 
     start () {
-        // [3]
+
+    }
+
+    setRunes(rune:RUNE){
+        this.runes.push(rune);
+        console.log('DicePanel.ts:setRunes:33 ->',rune);
+
+        if(this.runes.length === 6) {
+            this.onRefreshMode();
+        }
+    }
+
+    onRefreshMode(){
+        console.log('DicePanel.ts:onRefreshMode:41 -> onRefreshMode');
+        tween(this.refreshBtn)
+            .by(0.5,
+                {position: new Vec3(120,0,0)},
+                {easing: 'smooth'})
+            .start();
+    }
+
+    offRefreshMode(callback){
+        tween(this.refreshBtn)
+            .by(0.3,
+                { position: new Vec3(-120,0,0)},
+                {easing: 'smooth', onComplete:callback})
+            .start();
     }
 
     // update (deltaTime: number) {
     //     // [4]
     // }
+
+    refreshDice() {
+        let dice:RuneDice[] = [];
+        let dices = this.node.getChildByName('dices');
+
+        for(let i = 0; i<6; i++) {
+            let runeDice:RuneDice = dices.children[i].getComponent(RuneDice);
+            if(runeDice.rollState === ROLL.END){
+                dice.push(runeDice);
+            }else {
+                return;
+            }
+        }
+
+        this.runes.length = 0;
+        this.offRefreshMode(
+            ()=>{
+                this.initDice(dice);
+            }
+        );
+
+    }
+
+    initDice(dice){
+        tween(this.node)
+            .by(1, { position: new Vec3(0,-130,0)}, {
+                easing: 'smooth', onComplete:()=>{
+                    console.log('DicePanel.ts:onComplete:50 ->',dice.length);
+                    for(let i = 0; i<dice.length; i++) {
+                        dice[i].clearDice(DICE_RANK.NORMAL);
+                    }
+
+                    tween(this.node)
+                        .by(1, { position: new Vec3(0,130,0)}, {
+                            easing: 'smooth'}).start();
+                }}).start();
+    }
 }
 
 /**
