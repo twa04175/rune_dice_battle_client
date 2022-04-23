@@ -37,6 +37,7 @@ export class BattleManager extends Component {
 
     @property({type: Node})
     mouseRune:Node = null;
+    pickRune:RUNE = null;
 
     refreshCnt:number = 3;
 
@@ -67,6 +68,7 @@ export class BattleManager extends Component {
         this.deleteRune();
         this.createRune(rune);
 
+
         input.on(Input.EventType.MOUSE_MOVE, (r) => {
             if(this.mouseRune !== null) {
                 this.mouseRune.setPosition(new Vec3(r.getUILocationX(),r.getUILocationY()));
@@ -85,6 +87,7 @@ export class BattleManager extends Component {
     }
     createRune(rune:RUNE) {
         console.log('BattleManager.ts:createRune:94 ->',this.mouseRune);
+        this.pickRune = rune;
         this.mouseRune.active = true;
         this.mouseRune.setPosition(new Vec3(-50,-50,-50));
         this.mouseRune.children[rune].active = true;
@@ -93,6 +96,7 @@ export class BattleManager extends Component {
         for(let i = 0; i<this.mouseRune.children.length; i++) {
             this.mouseRune.children[i].active = false;
         }
+        this.pickRune = null;
         this.mouseRune.active = false;
     }
 
