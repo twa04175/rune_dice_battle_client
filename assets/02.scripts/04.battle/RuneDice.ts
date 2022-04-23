@@ -1,6 +1,8 @@
 
-import { _decorator, Component, Node, Sprite, Enum, tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, Sprite, Enum, tween, Vec3, find } from 'cc';
 import {RUNE, Rune } from './Rune';
+import {UIManager} from "db://assets/02.scripts/01.ui/UIManager";
+import {BattleManager} from "db://assets/02.scripts/04.battle/BattleManager";
 const { ccclass, property } = _decorator;
 
 /**
@@ -37,6 +39,8 @@ enum ROLL{
 @ccclass('RuneDice')
 export class RuneDice extends Component {
 
+    public battleManager:BattleManager = null;
+
     @property ({type:Enum(DICE_RANK)})
     public rank:DICE_RANK = DICE_RANK.NORMAL;
 
@@ -52,7 +56,8 @@ export class RuneDice extends Component {
     start () {
         // 타입과 랭크에 따른 주사위 스프라이트 변환
         this.setType(this.rank);
-        this.anchor = this.node.position;
+        console.log('RuneDice.ts:start:59 ->', find('Root/BattleManager'));
+        this.battleManager = find('Root/BattleManager').getComponent(BattleManager);
     }
 
     // update (deltaTime: number) {
@@ -60,7 +65,7 @@ export class RuneDice extends Component {
     // }
 
     setType (rank:DICE_RANK) {
-
+        this.node.getChildByName('dice').children[rank].active =true;
     }
 
     onClick() {
@@ -71,7 +76,8 @@ export class RuneDice extends Component {
             case ROLL.ING:
                 return
             case ROLL.END:
-                console.log('RuneDice.ts:onClick:71 -> pick RONE', this.pick);
+                console.log('RuneDice.ts:onClick:71 -> pick RONE',this.node);
+                this.battleManager.onRunePickMode(this.pick, this.node.getChildByName('rune_words').position);
                 break;
         }
     }

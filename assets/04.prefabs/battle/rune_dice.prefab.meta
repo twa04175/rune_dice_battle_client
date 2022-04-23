@@ -2,12 +2,12 @@
   "ver": "1.1.35",
   "importer": "prefab",
   "imported": true,
-  "uuid": "a6db2912-9f2b-46ab-8c73-432eae53847b",
+  "uuid": "d9891c99-249f-4f81-83cf-d08829e4d4df",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "rune_words"
+    "syncNodeName": "rune_dice"
   }
 }
