@@ -1,8 +1,11 @@
-import {_decorator, Component, director, input, Input, Prefab, instantiate, Node, Vec3} from 'cc';
+import {_decorator, Component, director, input, Input, Prefab, instantiate, Node, Vec3, Label, tween, find} from 'cc';
 import {ELEMENTAL_TYPE} from "db://assets/02.scripts/04.battle/RuneDice";
 import {MagicBook} from "db://assets/02.scripts/04.battle/MagicBook";
 import {RUNE} from "db://assets/02.scripts/04.battle/Rune";
 import {UIManager} from "db://assets/02.scripts/01.ui/UIManager";
+import {DicePanel} from "db://assets/02.scripts/01.ui/DicePanel";
+import {StatePanel} from "db://assets/02.scripts/01.ui/StatePanel";
+import {ActivePointBar} from "db://assets/02.scripts/01.ui/ActivePointBar";
 
 const { ccclass, property } = _decorator;
 
@@ -33,21 +36,106 @@ export class BattleManager extends Component {
     @property({type: MagicBook})
     public magicPanel:MagicBook = null;
 
-    battleState:BattleState = BattleState.WAIT;
-
     @property({type: Node})
     mouseRune:Node = null;
+
+    @property({type:StatePanel})
+    statePanel:StatePanel = null;
+
+    @property({type: Node})
+    startPanel:Node = null;
+
+    @property({type: ActivePointBar})
+    pointBar:ActivePointBar = null;
+
+    private actionPoint:number = 3;
+    private MAX_TURN_TIME = 15;
+
+    dicePanel:DicePanel;
+
+    //GAMESTATE
+    battleState:BattleState = BattleState.WAIT;
+    turn:number = 1;
+    turnTimer:number = this.MAX_TURN_TIME;
+    isTimer: boolean = false;
     pickRune:RUNE = null;
 
-    refreshCnt:number = 3;
+
 
     start () {
-        // [3]
+        this.dicePanel = find('Root/UI/DicePanel').getComponent(DicePanel);
+        //TODO: 서버하고 소켓 열어서 매칭
+        //매칭 성공시 게임 스타트 콜백 제공
+        this.scheduleOnce(this.battleStart, 2);//일단 그냥 진행
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    //전투 시작
+    battleStart() {
+        console.log('BattleManager.ts:battleStart:70 -> battle start');
+        this.startAnimation(); //전투 시작 알림
+        this.dicePanel.startRefresh();   //주사위 리롤
+        this.isTimer = true;        //턴 타이머 활성화
+        console.log('BattleManager.ts::75 ->',this.pointBar);
+        this.pointBar.setActivePoint(this.actionPoint);
+        //룬북 랜덤 룬으로 초기화
+    }
+
+    startAnimation() {
+        this.statePanel.setStateText('START');
+        tween(this.startPanel).by(2,{position:new Vec3(2000,0,0)},
+            {easing:'smooth', onComplete:()=>{
+                    this.statePanel.setStateText(`TURN ${this.turn}`);
+                    this.statePanel.onTimer(null);
+                }}).start();
+    }
+
+    //턴이 넘어갈 때 실행
+    nextTurn() {
+        this.turnTimer = this.MAX_TURN_TIME;
+        this.isTimer = true;
+        this.turn++;
+        this.dicePanel.startRefresh();
+        this.statePanel.setStateText(`TURN ${this.turn}`);
+        this.statePanel.onTimer(null);
+        // 주사위 리롤 + 사용횟수 초기화
+    }
+
+    //전투 계산 진행
+    battlePhase() {
+        this.isTimer = false;
+        this.statePanel.offTimer(()=>{
+            this.statePanel.setStateText('BATTLE');
+        });
+
+        this.scheduleOnce(()=>{
+            this.nextTurn();
+        },4); // 일단 약 4초간 진행
+    }
+
+    update (deltaTime: number) {
+        // [4]
+        if(this.isTimer === true) {
+            if(this.turnTimer <= 0) {
+                this.battlePhase();
+            }else {
+                this.statePanel.setTimerText(Math.floor(this.turnTimer).toString());
+                this.turnTimer -= deltaTime;
+            }
+        }
+    }
+
+    setActionPoint(point:number) {
+        if(point > 3) {
+            point = 3;
+        }
+
+        if(point<0) {
+            point = 0;
+        }
+
+        this.actionPoint = point;
+        this.pointBar.setActivePoint(this.actionPoint);
+    }
 
     backToLobby(){
         director.loadScene("01.Lobby");
@@ -67,7 +155,6 @@ export class BattleManager extends Component {
     onRunePickMode(rune:RUNE) {
         this.deleteRune();
         this.createRune(rune);
-
 
         input.on(Input.EventType.MOUSE_MOVE, (r) => {
             if(this.mouseRune !== null) {

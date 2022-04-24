@@ -49,7 +49,9 @@ export class Rune extends Component {
     // }
 
     clearRune(){
-        this.node.children[this.current].active = false;
+        if(this.current !== null) {
+            this.node.children[this.current].active = false;
+        }
         this.current = null;
     }
 

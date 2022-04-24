@@ -21,7 +21,7 @@ export class DicePanel extends Component {
 
     runes:RUNE[] = [];
 
-    @property({type:Node})
+    @property(Node)
     refreshBtn:Node = null;
 
     start () {
@@ -74,13 +74,25 @@ export class DicePanel extends Component {
         this.runes.length = 0;
         this.offRefreshMode(
             ()=>{
-                this.initDice(dice);
+                this.clearDice(dice);
             }
         );
-
     }
 
-    initDice(dice){
+    startRefresh(){
+        let dice:RuneDice[] = [];
+        let dices = this.node.getChildByName('dices');
+
+        for(let i = 0; i<6; i++) {
+            let runeDice:RuneDice = dices.children[i].getComponent(RuneDice);
+            dice.push(runeDice);
+        }
+
+        this.runes.length = 0;
+        this.clearDice(dice);
+    }
+
+    clearDice(dice){
         tween(this.node)
             .by(1, { position: new Vec3(0,-130,0)}, {
                 easing: 'smooth', onComplete:()=>{

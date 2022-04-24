@@ -28,17 +28,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 38
-      },
-      {
         "__id__": 40
       },
       {
-        "__id__": 43
+        "__id__": 42
+      },
+      {
+        "__id__": 45
       }
     ],
     "_prefab": {
-      "__id__": 45
+      "__id__": 47
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -739,6 +739,9 @@
       },
       {
         "__id__": 37
+      },
+      {
+        "__id__": 38
       }
     ],
     "removedComponents": []
@@ -806,6 +809,22 @@
     }
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 39
+    },
+    "propertyPath": [
+      "_active"
+    ],
+    "value": false
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "e3KSh29sNAuZaM8R1nGieb"
+    ]
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -815,7 +834,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 39
+      "__id__": 41
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -843,11 +862,11 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 41
+      "__id__": 43
     },
     "clickEvents": [
       {
-        "__id__": 42
+        "__id__": 44
       }
     ],
     "_interactable": true,
@@ -926,7 +945,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 44
+      "__id__": 46
     },
     "rank": 3,
     "_id": ""
