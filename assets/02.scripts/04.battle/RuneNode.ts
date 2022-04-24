@@ -16,8 +16,8 @@ const { ccclass, property } = _decorator;
  *
  */
 
-@ccclass('MagicNode')
-export class MagicNode extends Component {
+@ccclass('RuneNode')
+export class RuneNode extends Component {
 
     battleManager:BattleManager = null;
     sprite:Sprite = null;
