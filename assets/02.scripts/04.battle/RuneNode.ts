@@ -23,16 +23,20 @@ export class RuneNode extends Component {
     sprite:Sprite = null;
     runeSprite:Sprite = null;
 
-    @property({type: Enum(RUNE)})
     public currentRune:RUNE = null;
 
     start () {
         this.battleManager = find('Root/BattleManager').getComponent(BattleManager);
         this.sprite = this.node.getComponent(Sprite);
         this.node.on(Node.EventType.MOUSE_LEAVE, this.default, this);
-        let rune = this.node.children[0].children[this.currentRune];
-        rune.active = true;
-        this.runeSprite = rune.getComponent(Sprite);
+    }
+
+    setCurrentRune(rune:RUNE) {
+        console.log('RuneNode.ts:setCurrentRune:35 ->',rune);
+        this.currentRune = rune;
+        let runeNode = this.node.children[0].children[this.currentRune];
+        this.runeSprite = runeNode.getComponent(Sprite);
+        runeNode.active = true;
     }
 
     clear() {

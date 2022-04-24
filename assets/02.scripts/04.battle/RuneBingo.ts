@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node } from 'cc';
 import { RUNE } from './Rune';
+import {RuneNode} from "db://assets/02.scripts/04.battle/RuneNode";
 const { ccclass, property } = _decorator;
 
 /**
@@ -16,23 +17,31 @@ const { ccclass, property } = _decorator;
  */
 
 class BingoNode{
-    rune:RUNE,
-    active:boolean,
+    rune:RUNE = null;
+    active:boolean = false;
 }
 
 @ccclass('RuneBingo')
 export class RuneBingo extends Component {
 
-    bingo:BingoNode[][] = null;
+    BINGO_LENGTH = 3;
+
+    bingo:BingoNode[][] = [];
+    runeNodes:RuneNode[] = [];
 
     start () {
-        for(let i = 0; i<this.bingo.length; i++) {
-            this.bingo[i] = new BingoNode[3];
-            for(let j = 0; j<this.bingo.length; j++) {
-                this.bingo[i][j] = new BingoNode();
-            }
+        let runeNode = this.node.children[0].children;
+        for(let i = 0; i<runeNode.length; i++) {
+            this.runeNodes.push(runeNode[i].getComponent(RuneNode));
         }
 
+        for(let i = 0; i<this.BINGO_LENGTH; i++) {
+            this.bingo.push([]);
+            for(let j = 0; j<this.BINGO_LENGTH; j++) {
+                this.bingo[i].push(new BingoNode());
+            }
+        }
+        console.log('RuneBingo.ts:start:42 ->',this.runeNodes);
         this.initRuneBingo();
     }
 
@@ -46,10 +55,14 @@ export class RuneBingo extends Component {
 
     initRuneBingo(){
         for(let i = 0; i< 3; i++) {
-            for(let j = 0; i<3 ;j++) {
+            for(let j = 0; j<3 ;j++) {
                 let randomRune:RUNE = Math.floor(Math.random()* RUNE._LENGTH);
+                console.log('RuneBingo.ts:initRuneBingo:60 ->', this.bingo[i]);
+                console.log('RuneBingo.ts:initRuneBingo:60 ->', this.bingo[i][j]);
                 this.bingo[i][j].rune = randomRune;
                 this.bingo[i][j].active = false;
+                console.log('RuneBingo.ts:initRuneBingo:60 ->',i*3+j);
+                this.runeNodes[i*3+j].setCurrentRune(randomRune);
             }
         }
     }
