@@ -48,6 +48,11 @@ export class BattleManager extends Component {
     @property({type: ActivePointBar})
     pointBar:ActivePointBar = null;
 
+    @property({type: Node})
+    playerNode:Node = null;
+    @property({type: Node})
+    monsterNode:Node = null;
+
     private actionPoint:number = 3;
     private MAX_TURN_TIME = 15;
 
@@ -59,8 +64,6 @@ export class BattleManager extends Component {
     turnTimer:number = this.MAX_TURN_TIME;
     isTimer: boolean = false;
     pickRune:RUNE = null;
-
-
 
     start () {
         this.dicePanel = find('Root/UI/DicePanel').getComponent(DicePanel);
@@ -80,12 +83,18 @@ export class BattleManager extends Component {
         //룬북 랜덤 룬으로 초기화
     }
 
+    enemyCall(){
+        // -20, 120
+        tween(this.monsterNode).by(1,{position:new Vec3(0,-400,0)}, {easing:'bounceOut'}).start();
+    }
+
     startAnimation() {
         this.statePanel.setStateText('START');
         tween(this.startPanel).by(2,{position:new Vec3(2000,0,0)},
             {easing:'smooth', onComplete:()=>{
                     this.statePanel.setStateText(`TURN ${this.turn}`);
                     this.statePanel.onTimer(null);
+                    this.enemyCall();
                 }}).start();
     }
 
