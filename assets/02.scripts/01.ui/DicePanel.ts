@@ -1,7 +1,8 @@
 
-import { _decorator, Component, Node, tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, tween, Vec3, find } from 'cc';
 import {DICE_RANK, ROLL, RuneDice} from "db://assets/02.scripts/04.battle/RuneDice";
 import { RUNE } from '../04.battle/Rune';
+import {BattleManager} from "db://assets/02.scripts/04.battle/BattleManager";
 const { ccclass, property } = _decorator;
 
 /**
@@ -24,13 +25,15 @@ export class DicePanel extends Component {
     @property(Node)
     refreshBtn:Node = null;
 
-    start () {
+    battleManager:BattleManager = null;
+    isRefreshMode:boolean = false;
 
+    start () {
+        this.battleManager = find('Root/BattleManager').getComponent(BattleManager);
     }
 
     setRunes(rune:RUNE){
         this.runes.push(rune);
-        console.log('DicePanel.ts:setRunes:33 ->',rune);
 
         if(this.runes.length === 6) {
             this.onRefreshMode();
@@ -39,6 +42,7 @@ export class DicePanel extends Component {
 
     onRefreshMode(){
         console.log('DicePanel.ts:onRefreshMode:41 -> onRefreshMode');
+        this.isRefreshMode = true;
         tween(this.refreshBtn)
             .by(0.5,
                 {position: new Vec3(120,0,0)},
@@ -47,6 +51,7 @@ export class DicePanel extends Component {
     }
 
     offRefreshMode(callback){
+        this.isRefreshMode = false;
         tween(this.refreshBtn)
             .by(0.3,
                 { position: new Vec3(-120,0,0)},
@@ -59,6 +64,12 @@ export class DicePanel extends Component {
     // }
 
     refreshDice() {
+        if(this.battleManager.getActionPoint() <= 0) {
+            return;
+        }
+
+        this.battleManager.setActionPoint(this.battleManager.getActionPoint()-1);
+
         let dice:RuneDice[] = [];
         let dices = this.node.getChildByName('dices');
 
@@ -88,8 +99,17 @@ export class DicePanel extends Component {
             dice.push(runeDice);
         }
 
+        if(this.isRefreshMode === true) {
+            this.offRefreshMode(
+                ()=>{
+                    this.clearDice(dice);
+                }
+            );
+        } else {
+            this.clearDice(dice);
+        }
+
         this.runes.length = 0;
-        this.clearDice(dice);
     }
 
     clearDice(dice){

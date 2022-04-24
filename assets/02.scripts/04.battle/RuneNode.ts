@@ -32,9 +32,7 @@ export class RuneNode extends Component {
         this.node.on(Node.EventType.MOUSE_LEAVE, this.default, this);
         let rune = this.node.children[0].children[this.currentRune];
         rune.active = true;
-        console.log('MagicNode.ts:start:34 ->',rune);
         this.runeSprite = rune.getComponent(Sprite);
-        console.log('MagicNode.ts:start:36 ->',this.runeSprite);
     }
 
     clear() {

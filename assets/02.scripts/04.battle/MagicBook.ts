@@ -15,7 +15,6 @@ const { ccclass, property } = _decorator;
  * ManualUrl = https://docs.cocos.com/creator/3.4/manual/en/
  *
  */
-
 @ccclass('MagicBook')
 export class MagicBook extends Component {
 
@@ -27,10 +26,6 @@ export class MagicBook extends Component {
     start () {
         // [3]
     }
-
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 
     activeBook(element:ELEMENTAL_TYPE) {
         this.node.active = true;

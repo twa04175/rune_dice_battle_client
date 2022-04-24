@@ -53,8 +53,9 @@ export class BattleManager extends Component {
     @property({type: Node})
     monsterNode:Node = null;
 
-    private actionPoint:number = 3;
-    private MAX_TURN_TIME = 15;
+    private MAX_TURN_TIME:number = 60;
+    private MAX_ACTIVE_POINT:number = 3;
+    private actionPoint:number = this.MAX_ACTIVE_POINT;
 
     dicePanel:DicePanel;
 
@@ -79,7 +80,7 @@ export class BattleManager extends Component {
         this.dicePanel.startRefresh();   //주사위 리롤
         this.isTimer = true;        //턴 타이머 활성화
         console.log('BattleManager.ts::75 ->',this.pointBar);
-        this.pointBar.setActivePoint(this.actionPoint);
+        this.setActionPoint(this.MAX_ACTIVE_POINT);
         //룬북 랜덤 룬으로 초기화
     }
 
@@ -104,6 +105,8 @@ export class BattleManager extends Component {
         this.isTimer = true;
         this.turn++;
         this.dicePanel.startRefresh();
+        this.actionPoint = 3;
+        this.setActionPoint(this.MAX_ACTIVE_POINT);
         this.statePanel.setStateText(`TURN ${this.turn}`);
         this.statePanel.onTimer(null);
         // 주사위 리롤 + 사용횟수 초기화
@@ -131,6 +134,10 @@ export class BattleManager extends Component {
                 this.turnTimer -= deltaTime;
             }
         }
+    }
+
+    getActionPoint() {
+        return this.actionPoint;
     }
 
     setActionPoint(point:number) {

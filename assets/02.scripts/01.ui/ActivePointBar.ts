@@ -40,7 +40,7 @@ export class ActivePointBar extends Component {
         }
 
         for(let i = 0; i<this.fill.length; i++) {
-            if(i <= point) {
+            if(i < point) {
                 this.fill[i].active =true;
             }else {
                 this.fill[i].active =false;
