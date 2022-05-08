@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, input, Input, find, Sprite, Enum, Color } from 'cc';
 import {BattleManager} from "db://assets/02.scripts/04.battle/BattleManager";
 import { RUNE } from './Rune';
+import {RuneBingo} from "db://assets/02.scripts/04.battle/RuneBingo";
 const { ccclass, property } = _decorator;
 
 /**
@@ -22,13 +23,19 @@ export class RuneNode extends Component {
     battleManager:BattleManager = null;
     sprite:Sprite = null;
     runeSprite:Sprite = null;
+    runeBingo:RuneBingo = null;
+
+    posX:number = null;
+    posY:number = null;
 
     public currentRune:RUNE = null;
+    private isPick = false;
 
     start () {
         this.battleManager = find('Root/BattleManager').getComponent(BattleManager);
         this.sprite = this.node.getComponent(Sprite);
         this.node.on(Node.EventType.MOUSE_LEAVE, this.default, this);
+        this.runeBingo = this.node.parent.parent.getComponent(RuneBingo);
     }
 
     setCurrentRune(rune:RUNE) {
@@ -37,6 +44,11 @@ export class RuneNode extends Component {
         let runeNode = this.node.children[0].children[this.currentRune];
         this.runeSprite = runeNode.getComponent(Sprite);
         runeNode.active = true;
+    }
+
+    setXY(posX:number, posY:number){
+        this.posX = posX;
+        this.posY = posY;
     }
 
     clear() {
@@ -54,6 +66,10 @@ export class RuneNode extends Component {
     }
 
     checkRune() {
+        if(this.isPick === true) {
+            return false;
+        }
+
         if(this.battleManager.pickRune === this.currentRune) {
             this.sameRune();
             return true;
@@ -64,7 +80,14 @@ export class RuneNode extends Component {
     }
 
     onClickNode() {
+        let ap = this.battleManager.getActionPoint();
 
+        if(ap > 0 && this.battleManager.pickRune === this.currentRune) {
+            this.battleManager.addCurrentRune();
+            this.runeBingo.setRune(this.posX,this.posY);
+            this.sameRune();
+            this.isPick = true;
+        }
     }
 
     // update (deltaTime: number) {
@@ -73,20 +96,24 @@ export class RuneNode extends Component {
 
     //아웃라인 컬러 회색
     default(){
+        if(this.isPick === true) {
+            return;
+        }
+
         this.sprite.color = new Color('#FFFFFF');
         this.runeSprite.color = new Color('#FFFFFF');
     }
 
     //아웃라인 컬러 초록색
     sameRune(){
-        this.sprite.color = new Color('#FF9E9E');
-        this.runeSprite.color = new Color('#FF9E9E');
-    }
-
-    //아웃라인 컬러 빨간색
-    noSameRune(){
         this.sprite.color = new Color('#C0FFD7');
         this.runeSprite.color = new Color('#C0FFD7');
+    }
+
+    //아웃라인 컬러 c
+    noSameRune(){
+        this.sprite.color = new Color('#FF9E9E');
+        this.runeSprite.color = new Color('#FF9E9E');
     }
 }
 

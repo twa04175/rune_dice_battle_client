@@ -66,9 +66,14 @@ export class BattleManager extends Component {
     isTimer: boolean = false;
     pickRune:RUNE = null;
 
+    //선택한 주사위 및 완성된 빙고의 결과를 여기 푸쉬하고 전투페이즈에 차례로 실행
+    battleCommand = [];
+
     start () {
         this.dicePanel = find('Root/UI/DicePanel').getComponent(DicePanel);
         //TODO: 서버하고 소켓 열어서 매칭
+
+
         //매칭 성공시 게임 스타트 콜백 제공
         this.scheduleOnce(this.battleStart, 2);//일단 그냥 진행
     }
@@ -203,6 +208,13 @@ export class BattleManager extends Component {
         this.mouseRune.active = false;
     }
 
+    //핸재 선택된 룬을 확정지었을 때
+    addCurrentRune() {
+        this.setActionPoint(this.actionPoint -1);
+        this.deleteRune();
+
+        //선택했던 주사위도 더이상 선택못하게 만들어야함
+    }
 }
 
 /**

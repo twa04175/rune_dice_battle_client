@@ -33,7 +33,6 @@ export class MagicBook extends Component {
         if(this.currentBook !== null) {
             this.currentBook.active = false;
         }
-
         this.currentBook = this.node.children[0].children[element];
         this.currentBook.active = true;
 

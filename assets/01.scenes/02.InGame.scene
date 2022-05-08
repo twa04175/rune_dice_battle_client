@@ -21,11 +21,11 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 2358
+      "__id__": 2361
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 2359
+      "__id__": 2362
     },
     "_id": "8c97cc61-91f0-47bc-8eb1-d3718def8081"
   },
@@ -44,10 +44,13 @@
         "__id__": 5
       },
       {
+        "__id__": 2353
+      },
+      {
         "__id__": 2227
       },
       {
-        "__id__": 2353
+        "__id__": 2356
       },
       {
         "__id__": 2231
@@ -62,13 +65,13 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 2355
+        "__id__": 2358
       },
       {
-        "__id__": 2356
+        "__id__": 2359
       },
       {
-        "__id__": 2357
+        "__id__": 2360
       }
     ],
     "_prefab": null,
@@ -156,7 +159,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 320,
+    "_orthoHeight": 369.18367346938777,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -42253,7 +42256,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Main Camera",
+    "_name": "NetworkManager",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -42263,6 +42266,84 @@
     "_components": [
       {
         "__id__": 2354
+      },
+      {
+        "__id__": 2355
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "46v6Y/yfJJ+I+XtxyqBR3S"
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2353
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 100
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": "dfszoLzfJI/6yxSHOpM97p"
+  },
+  {
+    "__type__": "c047cI7jm1B4IPppIFJ7rg2",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2353
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_id": "96EcRon9JAdoXOPgrGJMNc"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Main Camera",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2357
       }
     ],
     "_prefab": null,
@@ -42299,7 +42380,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 2353
+      "__id__": 2356
     },
     "_enabled": true,
     "__prefab": null,
@@ -42511,19 +42592,19 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 2360
-    },
-    "shadows": {
-      "__id__": 2361
-    },
-    "_skybox": {
-      "__id__": 2362
-    },
-    "fog": {
       "__id__": 2363
     },
-    "octree": {
+    "shadows": {
       "__id__": 2364
+    },
+    "_skybox": {
+      "__id__": 2365
+    },
+    "fog": {
+      "__id__": 2366
+    },
+    "octree": {
+      "__id__": 2367
     }
   },
   {

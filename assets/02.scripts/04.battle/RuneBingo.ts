@@ -46,7 +46,7 @@ export class RuneBingo extends Component {
     }
 
     setRune(x:number, y:number){
-
+        this.bingo[x][y].active = true;
     }
 
     checkCompleteLine() {
@@ -63,6 +63,7 @@ export class RuneBingo extends Component {
                 this.bingo[i][j].active = false;
                 console.log('RuneBingo.ts:initRuneBingo:60 ->',i*3+j);
                 this.runeNodes[i*3+j].setCurrentRune(randomRune);
+                this.runeNodes[i*3+j].setXY(i,j);
             }
         }
     }
